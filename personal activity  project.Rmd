@@ -1,0 +1,71 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
+Analyzing relationship between miles per gallon and automatic or manual transmission car
+=====================================================================
+## Cuiming Zheng
+##Sep 8,2017
+# Executive summary
+ 
+ 
+ 
+ 
+
+# getting data
+following is R code  to download training and testing data and read data in r
+```{r echo = TRUE,message=FALSE, warning=FALSE }
+setwd("C:/Users/u292859/Desktop/Reproducible Research")
+url="https://d396qusza40orc.cloudfront.net/predmachlearn/pm
+l-training.csv"
+
+download.file(url,destfile="C:/Users/u292859/Desktop/Reproducible Research/pml-training.csv")
+data<-read.csv("pml-training.csv" )
+str(data)
+dim(data)
+URL="https://d396qusza40orc.cloudfront.net/predmachlearn/pm
+l-testing.csv"
+download.file(url,destfile="C:/Users/u292859/Desktop/Reproducible Research/pml-test.csv")
+testdata<-read.csv("pml-test.csv" )
+dim(new)
+```
+
+
+# clean data
+
+following are R code to remove NA variables
+```{r echo = TRUE}
+nacol<-which(colSums(is.na(data))>19000)
+newtrain<-data[,-c(nacol)]
+```
+#preprocess data to remove near zero variables
+following are r code preprocess data, we also remove the first 6 variables that is not related to the project.
+```{r echo = TRUE}
+library(caret)
+nsv<-nearZeroVar(newtrain)
+new<-newtrain[,-nsv]
+protrain<-newtrain[,-c(1:6)]
+```
+
+# create data partation on cleanned and preprocessed training dataset
+
+Following are R code to create data partition
+```{r echo = TRUE}
+inTrain = createDataPartition(protrain$classe, p = 3/4)[[1]]
+training = protrain[ inTrain,]
+testing = protrain[-inTrain,]
+dim(training)
+dim(testing)
+```
+
+# multiple models analsyis and  model selection
+following are R code for fit linear regression with single variable transmission
+```{r echo = TRUE}
+
+```
+
+``{r echo = TRUE}
+
+`
+#  conclusions
